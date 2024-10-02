@@ -1,23 +1,24 @@
 ﻿namespace Entity;
 public class User
 {
-
-    public string Rol { get; set;} 
+    public string? Rol { get; set;} 
 
     public string? Identificacion { get; set; }
 
-    public string Email { get; set; }
+    public string? Email { get; set; }
 
-    public int UserId { get; set; }
+    public int Id { get; set; }
 
 }
 
-public class DefaultUser
+public class LoginUser
 {
-    public int UserId { get; set; }
-    public string Email { get; set; }
-    public string Password { get; set; }
-    public string Salt { get; set; }
+    public int Id { get; set; }
+    public string Rol { get; set; }
+    public string Identificacion { get; set; }
+    public string? Email { get; set; }
+    public string? Password { get; set; }
+    public string? Salt { get; set; }
 }
 
 public class IdentityModel{

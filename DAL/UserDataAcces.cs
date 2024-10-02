@@ -14,21 +14,7 @@ public class UserDataAcces{
         _connection = connection._connection;
     }
 
-    public void SaveUserPersonalData(User user){
-
-        using(var command =  _connection.CreateCommand()){
-            command.CommandText = @"INSERT INTO USERS (nombres, apellidos, edad, rol, identificacion)" 
-            + "VALUES (@nombres, @apellidos, @edad, @rol, @identificacion)";
-            command.Parameters.AddWithValue("@nombres", user.Nombres);
-            command.Parameters.AddWithValue("@apellidos", user.Apellidos);
-            command.Parameters.AddWithValue("@edad", user.Edad);
-            command.Parameters.AddWithValue("@rol", user.Rol);
-            command.Parameters.AddWithValue("@identificacion", user.Identificacion);
-            command.ExecuteNonQuery();
-        }
-    }
-
-    public void SaveDefaultUser(DefaultUser user)
+    public void SaveDefaultUser(LoginUser user)
     {
         using(var command = _connection.CreateCommand())
         {
@@ -36,9 +22,7 @@ public class UserDataAcces{
             command.Transaction = transaction;
             try
             {
-                SaveUser(user, command);
-                int userId = GetUserKey(user, command);
-                SaveLoginUser(user, command, userId);
+                SaveLoginUser(user, command);
                 transaction.Commit();
             }
             catch (Exception e)
@@ -52,46 +36,24 @@ public class UserDataAcces{
         }
     }
 
-    private static void SaveLoginUser(DefaultUser user, SqlCommand command, int userId)
+    private static void SaveLoginUser(LoginUser user, SqlCommand command)
     {
-        command.CommandText = @"INSERT INTO LoginUser(user_id, email, password, salt)"
-                            + "VALUES (@user_id, @email, @password, @salt)";
-        command.Parameters.AddWithValue("@user_id", userId);
+        command.CommandText = @"INSERT INTO UsersTemp(identificacion, email, clave, salt, rol)"
+                            + "VALUES (@identificacion, @email, @clave, @salt, @rol)";
+        command.Parameters.AddWithValue("@identificacion", user.Identificacion);
         command.Parameters.AddWithValue("@email", user.Email);
-        command.Parameters.AddWithValue("@password", user.Password);
+        command.Parameters.AddWithValue("@clave", user.Password);
         command.Parameters.AddWithValue("@salt", user.Salt);
+        command.Parameters.AddWithValue("@rol", user.Rol);
+
         command.ExecuteNonQuery();
-    }
-
-    private void SaveUser(DefaultUser user, SqlCommand command)
-    {
-        command.CommandText = @"INSERT INTO USERS (email, rol)"
-                            + "VALUES (@email, @rol)";
-        command.Parameters.AddWithValue("@email", user.Email);
-        command.Parameters.AddWithValue("@rol", "Admin");
-        command.ExecuteNonQuery();
-        command.Parameters.Clear();
-    }
-
-    private static int GetUserKey(DefaultUser user, SqlCommand command)
-    {
-        command.CommandText = $"SELECT user_id FROM Users WHERE email = @email";
-        command.Parameters.AddWithValue("@email", user.Email);
-
-        SqlDataReader dataReader = command.ExecuteReader();
-        command.Parameters.Clear();
-
-        dataReader.Read();
-        int userId = (int)dataReader["user_id"];
-        dataReader.Close();
-        return userId;
     }
 
     public List<User> SearchAll ( ) {
         SqlDataReader dataReader;
         List<User> users = new List<User> ( );
         using (var command = _connection.CreateCommand ( )) {
-            command.CommandText = "SELECT * FROM Users";
+            command.CommandText = "SELECT * FROM UsersTemp";
             dataReader = command.ExecuteReader ( );
             if (dataReader.HasRows) {
                 while (dataReader.Read ( )) {
@@ -109,9 +71,9 @@ public class UserDataAcces{
         return user;
     }
 
-    public DefaultUser DefaultSearchByKey(string key, string value)
+    public LoginUser DefaultSearchByKey(string key, string value)
     {
-        DefaultUser user = DefaultSelect(key, value);
+        LoginUser user = DefaultSelect(key, value);
         return user;
     }
 
@@ -122,7 +84,7 @@ public class UserDataAcces{
 
         using(var command = _connection.CreateCommand())
         {
-            command.CommandText = $@"SELECT * FROM Users WHERE @value = {key}";
+            command.CommandText = $@"SELECT * FROM UsersTemp WHERE @value = {key}";
             command.Parameters.AddWithValue("@value", value);
             dataReader = command.ExecuteReader();
             if (dataReader.HasRows)
@@ -134,15 +96,34 @@ public class UserDataAcces{
         }
     }
 
-    private DefaultUser DefaultSelect(string key, string value)
+    private LoginUser DefaultSelect(string key, string value)
     {
         SqlDataReader dataReader;
-        DefaultUser user = new DefaultUser();
+        LoginUser user = new LoginUser();
 
         using (var command = _connection.CreateCommand())
         {
-            command.CommandText = $@"SELECT * FROM LoginUser WHERE @value = {key}";
+            command.CommandText = $@"SELECT * FROM UsersTemp WHERE @value = {key}";
             command.Parameters.AddWithValue("@value", value);
+            dataReader = command.ExecuteReader();
+            if (dataReader.HasRows)
+            {
+                dataReader.Read();
+                user = DefaultDataMapInReader(dataReader);
+            }
+            return user;
+        }
+    }
+
+    public LoginUser GetUserByEmail(string email)
+    {
+        SqlDataReader dataReader;
+        LoginUser user = new LoginUser();
+
+        using (var command = _connection.CreateCommand())
+        {
+            command.CommandText = $@"SELECT * FROM UsersTemp WHERE @email = email";
+            command.Parameters.AddWithValue("@email", email);
             dataReader = command.ExecuteReader();
             if (dataReader.HasRows)
             {
@@ -156,11 +137,8 @@ public class UserDataAcces{
     private User DataMapInReader (SqlDataReader dataReader) {
         if (!dataReader.HasRows) return null;
         User user = new User ( );
-        user.UserId = (int) dataReader["user_id"];
-        user.Nombres =  ColumnValueIsNull(dataReader["nombres"]) ? null : (string) dataReader["nombres"];
-        user.Apellidos = ColumnValueIsNull(dataReader["apellidos"]) ? null : (string) dataReader["apellidos"];
-        user.Email = (string) dataReader["email"];
-        user.Edad = ColumnValueIsNull(dataReader["edad"]) ? null : (int) dataReader["edad"];             
+        user.Id = (int) dataReader["id"];
+        user.Email = (string) dataReader["email"];          
         user.Rol = (string) dataReader["rol"];
         user.Identificacion = ColumnValueIsNull(dataReader["identificacion"]) ? null : (string) dataReader["identificacion"];;
         return user;
@@ -171,11 +149,11 @@ public class UserDataAcces{
         return DBNull.Value.Equals(reader);
     }
 
-    private DefaultUser DefaultDataMapInReader(SqlDataReader dataReader)
+    private LoginUser DefaultDataMapInReader(SqlDataReader dataReader)
     {
         if (!dataReader.HasRows) return null;
-        DefaultUser user = new DefaultUser();
-        user.UserId = (int)dataReader["user_id"];
+        LoginUser user = new LoginUser();
+        user.Id = (int)dataReader["id"];
         user.Email = (string)dataReader["email"];
         user.Password = (string)dataReader["password"];
         user.Salt = (string)dataReader["salt"];

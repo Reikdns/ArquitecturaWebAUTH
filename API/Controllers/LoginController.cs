@@ -34,7 +34,7 @@ namespace API.Controllers
                 return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
             }
 
-            var response = _userService.DefaultSearchByKey("email", systemUser.Email);
+            var response = _userService.GetUserByEmail(systemUser.Email);
 
             if(response.Error)
             {

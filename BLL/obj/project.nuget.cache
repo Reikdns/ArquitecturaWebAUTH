@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RjuKzoc6hls=",
+  "dgSpecHash": "Jmty2Z+N2o4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\BLL\\BLL.csproj",
+  "projectFilePath": "c:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\BLL\\BLL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

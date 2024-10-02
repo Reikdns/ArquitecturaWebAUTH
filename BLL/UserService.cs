@@ -15,45 +15,26 @@ public class UserService
         _repository = new UserDataAcces(_connection);
     }
 
-    public RequestResponse<User> SaveUserPersonalData(User user)
-    {
-        if(Validate("identificacion", user.Identificacion) && Validate("email", user.Email)){        
-            try
-            {                                          
-                _connection.Open();                
-                _repository.SaveUserPersonalData(user);
-                _connection.Close();
-                return new RequestResponse<User>(user);
-            }
-            catch (Exception e)
-            {
-                return new RequestResponse<User>(e.Message);
-            }
-        }
-        else {
-            return new RequestResponse<User>("El usuario ya ha sido registrado.");
-        }
-    }
 
-    public RequestResponse<DefaultUser> SaveUser(DefaultUser user)
+    public RequestResponse<LoginUser> SaveUser(LoginUser user)
     {
-        if(DefaultValidate("email", user.Email))
+        if(EmailValidate(user.Email))
         {
             try
             {
                 _connection.Open();
                 _repository.SaveDefaultUser(user);
                 _connection.Close();
-                return new RequestResponse<DefaultUser>("La cuenta ha sido registrada exitosamente.");
+                return new RequestResponse<LoginUser>("La cuenta ha sido registrada exitosamente.");
             }
             catch (Exception e)
             {
-                return new RequestResponse<DefaultUser>(e.Message);
+                return new RequestResponse<LoginUser>(e.Message);
             }
         }
         else
         {
-            return new RequestResponse<DefaultUser>("El correo ingresado ya está asociado a una cuenta.");
+            return new RequestResponse<LoginUser>("El correo ingresado ya está asociado a una cuenta.");
         }
     }
 
@@ -68,9 +49,9 @@ public class UserService
         return false;
     }
 
-    private bool DefaultValidate(string key, string value)
+    private bool EmailValidate(string email)
     {
-        var response = DefaultSearchByKey(key, value);
+        var response = GetUserByEmail(email);
 
         if (response.Error)
         {
@@ -115,12 +96,12 @@ public class UserService
         }
     }
 
-    public RequestResponse<DefaultUser> DefaultSearchByKey(string key, string value)
+    public RequestResponse<LoginUser> GetUserByEmail(string email)
     {
         try
         {
             _connection.Open();
-            DefaultUser user = _repository.DefaultSearchByKey(key, value);
+            LoginUser user = _repository.GetUserByEmail(email);
             _connection.Close();
 
             if (user.Email == null)
@@ -128,11 +109,11 @@ public class UserService
                 throw new Exception("El usuario no ha sido encontrado");
             }
 
-            return new RequestResponse<DefaultUser>(user);
+            return new RequestResponse<LoginUser>(user);
         }
         catch (Exception e)
         {
-            return new RequestResponse<DefaultUser>(e.Message);
+            return new RequestResponse<LoginUser>(e.Message);
         }
     }
 

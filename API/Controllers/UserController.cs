@@ -45,31 +45,15 @@ public class UserController : Controller
         return Ok(users);
     }
 
-    [Authorize(Roles="Admin")]
-    [HttpPost("register-user")]
-    public ActionResult<UserViewModel> RegisterUser(UserInputModel user){
-
-        HashedPassword hashedPassword = HashHelper.Hash(user.Password);
-        user.Password = hashedPassword.Password;
-        user.Salt = hashedPassword.Salt;
-
-        var response = _userService.SaveUserPersonalData(MapUser(user));
-
-        if(response.Error){
-            return BadRequest(response.Message);
-        }
-
-        return Ok(response.Response);
-    }
-
+    [AllowAnonymous]
     [HttpPost("register-default-user")]
     public ActionResult<DefaultUserLoginModel> RegisterDefaultUser(DefaultUserLoginModel user)
     {
         HashedPassword hashedPassword = HashHelper.Hash(user.Password);
         user.Password = hashedPassword.Password;
-        user.Salt = hashedPassword.Salt;
+        string salt = hashedPassword.Salt;
 
-        var response = _userService.SaveUser(MapUser(user));
+        var response = _userService.SaveUser(MapUser(user, salt));
 
         if(response.Error)
         {
@@ -103,22 +87,14 @@ public class UserController : Controller
         return Ok(identityModel == null ? "" : identityModel);
     }
 
-    private User MapUser(UserInputModel user){
-        return new User {
-            Nombres = user.Nombres,
-            Apellidos = user.Apellidos,
-            Edad = user.Edad,
-            Identificacion = user.Identificacion,
-            Rol = user.Rol,
-        };
-    }
-
-    private DefaultUser MapUser(DefaultUserLoginModel user)
+    private LoginUser MapUser(DefaultUserLoginModel user, string salt)
     {
-        return new DefaultUser{
+        return new LoginUser{
+            Rol = user.Rol,
+            Identificacion = user.Identificacion,
             Email = user.Email,
             Password = user.Password,
-            Salt = user.Salt
+            Salt = salt
         };
     }
 }

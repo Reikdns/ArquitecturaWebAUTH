@@ -32,6 +32,6 @@ public class UserViewModel
         Email = user.Email;
         Rol = user.Rol;
         Identificacion = user.Identificacion;
-        UserId = user.UserId;
+        UserId = user.Id;
     }
 } 

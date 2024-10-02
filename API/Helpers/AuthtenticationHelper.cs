@@ -13,7 +13,7 @@ using System.Text;
 
 public class AuthenticationHelper
 {
-    public static string CreateToken(LoginViewModel systemUser, DefaultUser user, string rol, string secretKey)
+    public static string CreateToken(LoginViewModel systemUser, LoginUser user, string rol, string secretKey)
     {
         if (HashHelper.CheckHash(systemUser.Password, user.Password, user.Salt))
         {
