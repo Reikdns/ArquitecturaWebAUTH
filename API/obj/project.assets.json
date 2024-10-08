@@ -1250,11 +1250,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\API\\API.csproj",
+      "projectUniqueName": "C:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "c:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\API\\API.csproj",
+      "projectPath": "C:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\API\\API.csproj",
       "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\API\\obj\\",
+      "outputPath": "C:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -1269,11 +1269,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "c:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\BLL\\BLL.csproj": {
-              "projectPath": "c:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\BLL\\BLL.csproj"
+            "C:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\BLL\\BLL.csproj": {
+              "projectPath": "C:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\BLL\\BLL.csproj"
             },
-            "c:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\Entity\\Entity.csproj": {
-              "projectPath": "c:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\Entity\\Entity.csproj"
+            "C:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\Entity\\Entity.csproj": {
+              "projectPath": "C:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\Entity\\Entity.csproj"
             }
           }
         }

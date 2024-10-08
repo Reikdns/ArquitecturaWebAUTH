@@ -16,37 +16,27 @@ public class UserService
     }
 
 
-    public RequestResponse<LoginUser> SaveUser(LoginUser user)
+    public RequestResponse<IdentityModel> SaveUser(LoginUser user)
     {
-        if(EmailValidate(user.Email))
+        IdentityModel identityModel = new IdentityModel(user.Email, user.Rol);
+        if(EmailValidate(user.Email) && IdentificationValidate(user.Identificacion))
         {
             try
             {
                 _connection.Open();
                 _repository.SaveDefaultUser(user);
                 _connection.Close();
-                return new RequestResponse<LoginUser>("La cuenta ha sido registrada exitosamente.");
+                return new RequestResponse<IdentityModel>(identityModel, "El usuario ha sido guardado correctamente.");
             }
             catch (Exception e)
             {
-                return new RequestResponse<LoginUser>(e.Message);
+                return new RequestResponse<IdentityModel>(e.Message);
             }
         }
         else
         {
-            return new RequestResponse<LoginUser>("El correo ingresado ya está asociado a una cuenta.");
+            return new RequestResponse<IdentityModel>("El usuario a registrar ya existe en el sistema.");
         }
-    }
-
-    private bool Validate(string key, string value){
-
-        var response = SearchByKey(key, value);
-
-        if (response.Error)
-        {  
-            return true;
-        } 
-        return false;
     }
 
     private bool EmailValidate(string email)
@@ -55,9 +45,20 @@ public class UserService
 
         if (response.Error)
         {
-            return true;
+            return false;
         }
-        return false;
+        return true;
+    }
+
+    private bool IdentificationValidate(string identificacion)
+    {
+        var response = GetUserByIdentification(identificacion);
+
+        if (response.Error)
+        {
+            return false;
+        }
+        return true;
     }
     
     public RequestResponse<List<User>> SearchAllUsers()
@@ -67,32 +68,11 @@ public class UserService
             _connection.Open();
             List<User> Users = _repository.SearchAll();
             _connection.Close();
-            return new RequestResponse<List<User>>(Users);
+            return new RequestResponse<List<User>>(Users, "OK");
         }
         catch (Exception e)
         {
             return new RequestResponse<List<User>>(e.Message);
-        }
-    }
-
-    public RequestResponse<User> SearchByKey(string key, string value)
-    {
-        try
-        {
-            _connection.Open();
-            User user = _repository.SearchByKey(key, value);
-            _connection.Close();
-
-            if(user.Email == null)
-            {
-                throw new Exception("El usuario no ha sido encontrado");
-            }
-
-            return new RequestResponse<User>(user);
-        }
-        catch (Exception e)
-        {
-            return new RequestResponse<User>(e.Message);
         }
     }
 
@@ -106,10 +86,31 @@ public class UserService
 
             if (user.Email == null)
             {
-                throw new Exception("El usuario no ha sido encontrado");
+                return new RequestResponse<LoginUser>(user, "OK");
             }
 
-            return new RequestResponse<LoginUser>(user);
+            return new RequestResponse<LoginUser>(user, "El usuario ya se encuentra registrado");
+        }
+        catch (Exception e)
+        {
+            return new RequestResponse<LoginUser>(e.Message);
+        }
+    }
+
+    public RequestResponse<LoginUser> GetUserByIdentification(string identificacion)
+    {
+        try
+        {
+            _connection.Open();
+            LoginUser user = _repository.GetUserByIdentificaction(identificacion);
+            _connection.Close();
+
+            if (user.Email == null)
+            {
+                return new RequestResponse<LoginUser>(user, "OK");
+            }
+
+            return new RequestResponse<LoginUser>(user, "El usuario ya se encuentra registrado");
         }
         catch (Exception e)
         {
@@ -124,10 +125,11 @@ public class RequestResponse<T>
     public bool Error { get; set; }
     public string Message { get; set; }
     public T Response { get; set; }
-    public RequestResponse(T response)
+    public RequestResponse(T response, string message)
     {
         Error = false;
         Response = response;
+        Message = message;
     }
     public RequestResponse(string message)
     {

@@ -9,7 +9,7 @@ namespace API.Models
     {
         public string Email { get; set; }
         public string Password { get; set; }
-        public string Identificacion { get; set; }     
+        public string UsuarioIdentificacion { get; set; }     
         public string Rol {get; set;}
     }
 }

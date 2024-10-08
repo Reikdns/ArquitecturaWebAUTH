@@ -57,27 +57,14 @@ public class UserController : Controller
 
         if(response.Error)
         {
-            return BadRequest(response.Message);
+            return Ok(response);
         }
 
-        return Ok(response.Response);
+        return Ok(response);
     } 
 
-    [Authorize(Roles="Admin")]
-    [HttpGet("search-by-key/{key}/{value}")]
-    public ActionResult<UserViewModel> SearchByKey(string key, string value)
-    {
-        var response = _userService.SearchByKey(key, value);
-
-        if(response.Error)
-        {
-            return BadRequest(response.Message);
-        }
-
-        return Ok(new UserViewModel(response.Response));
-    }
-
     [HttpGet("identity")]
+    [Authorize(Roles="Admin,Estudiante,Profesor")]
     public IActionResult GetIdentity()
     {
         var nameIdentifier = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier);
@@ -91,7 +78,7 @@ public class UserController : Controller
     {
         return new LoginUser{
             Rol = user.Rol,
-            Identificacion = user.Identificacion,
+            Identificacion = user.UsuarioIdentificacion,
             Email = user.Email,
             Password = user.Password,
             Salt = salt

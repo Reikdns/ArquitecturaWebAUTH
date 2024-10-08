@@ -491,11 +491,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\DAL\\DAL.csproj",
+      "projectUniqueName": "C:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\DAL\\DAL.csproj",
       "projectName": "DAL",
-      "projectPath": "c:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\DAL\\DAL.csproj",
+      "projectPath": "C:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\DAL\\DAL.csproj",
       "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\DAL\\obj\\",
+      "outputPath": "C:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\DAL\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -510,8 +510,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "c:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\Entity\\Entity.csproj": {
-              "projectPath": "c:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\Entity\\Entity.csproj"
+            "C:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\Entity\\Entity.csproj": {
+              "projectPath": "C:\\Users\\hp\\Documents\\Universidad\\ARQUITECTURA WEB SALOMON\\Aeris-API-REST\\Entity\\Entity.csproj"
             }
           }
         }
@@ -575,7 +575,7 @@
       "code": "NU1902",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "El paquete \"System.Data.SqlClient\" 4.8.3 tiene una vulnerabilidad de gravedad moderada conocida, https://github.com/advisories/GHSA-8g2p-5pqh-5jmc",
+      "message": "Package 'System.Data.SqlClient' 4.8.3 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-8g2p-5pqh-5jmc",
       "libraryId": "System.Data.SqlClient",
       "targetGraphs": [
         "net6.0"
@@ -585,7 +585,7 @@
       "code": "NU1903",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "El paquete \"System.Data.SqlClient\" 4.8.3 tiene una vulnerabilidad de gravedad alta conocida, https://github.com/advisories/GHSA-98g6-xh36-x2p7",
+      "message": "Package 'System.Data.SqlClient' 4.8.3 has a known high severity vulnerability, https://github.com/advisories/GHSA-98g6-xh36-x2p7",
       "libraryId": "System.Data.SqlClient",
       "targetGraphs": [
         "net6.0"

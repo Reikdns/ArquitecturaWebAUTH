@@ -38,9 +38,9 @@ public class UserDataAcces{
 
     private static void SaveLoginUser(LoginUser user, SqlCommand command)
     {
-        command.CommandText = @"INSERT INTO UsersTemp(identificacion, email, clave, salt, rol)"
-                            + "VALUES (@identificacion, @email, @clave, @salt, @rol)";
-        command.Parameters.AddWithValue("@identificacion", user.Identificacion);
+        command.CommandText = @"INSERT INTO Users(usuarioidentificacion, email, clave, salt, rol)"
+                            + "VALUES (@usuarioidentificacion, @email, @clave, @salt, @rol)";
+        command.Parameters.AddWithValue("@usuarioidentificacion", user.Identificacion);
         command.Parameters.AddWithValue("@email", user.Email);
         command.Parameters.AddWithValue("@clave", user.Password);
         command.Parameters.AddWithValue("@salt", user.Salt);
@@ -115,14 +115,33 @@ public class UserDataAcces{
         }
     }
 
-    public LoginUser GetUserByEmail(string email)
+    public LoginUser GetUserByIdentificaction(string identificacion)
     {
         SqlDataReader dataReader;
         LoginUser user = new LoginUser();
 
         using (var command = _connection.CreateCommand())
         {
-            command.CommandText = $@"SELECT * FROM UsersTemp WHERE @email = email";
+            command.CommandText = $@"SELECT * FROM Usuarios WHERE @identificacion = identificacion";
+            command.Parameters.AddWithValue("@identificacion", identificacion);
+            dataReader = command.ExecuteReader();
+            if (dataReader.HasRows)
+            {
+                dataReader.Read();
+                user = DefaultDataMapInReader(dataReader);
+            }
+            return user;
+        }
+    }
+
+        public LoginUser GetUserByEmail(string email)
+    {
+        SqlDataReader dataReader;
+        LoginUser user = new LoginUser();
+
+        using (var command = _connection.CreateCommand())
+        {
+            command.CommandText = $@"SELECT * FROM Users WHERE @email = email";
             command.Parameters.AddWithValue("@email", email);
             dataReader = command.ExecuteReader();
             if (dataReader.HasRows)
@@ -155,7 +174,9 @@ public class UserDataAcces{
         LoginUser user = new LoginUser();
         user.Id = (int)dataReader["id"];
         user.Email = (string)dataReader["email"];
-        user.Password = (string)dataReader["password"];
+        user.Identificacion = (string)dataReader["UsuarioIdentificacion"];
+        user.Rol = (string)dataReader["rol"];
+        user.Password = (string)dataReader["clave"];
         user.Salt = (string)dataReader["salt"];
 
         return user;

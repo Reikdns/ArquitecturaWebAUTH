@@ -10,7 +10,7 @@ namespace API.Models
         [Required(ErrorMessage="Es necesario proporcionar el nombre de usuario.")]
         public string Email { get; set; }
         [Required(ErrorMessage="Es necesario proporcional la clave del ususario.")]
-        public string Password { get; set; }
+        public string Clave { get; set; }
 
     }
 
