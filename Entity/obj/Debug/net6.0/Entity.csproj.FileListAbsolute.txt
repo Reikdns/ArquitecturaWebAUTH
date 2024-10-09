@@ -37,15 +37,3 @@ C:\Users\Reikd\Documents\Aeris-API-REST\Entity\obj\Debug\net6.0\Entity.dll
 C:\Users\Reikd\Documents\Aeris-API-REST\Entity\obj\Debug\net6.0\refint\Entity.dll
 C:\Users\Reikd\Documents\Aeris-API-REST\Entity\obj\Debug\net6.0\Entity.pdb
 C:\Users\Reikd\Documents\Aeris-API-REST\Entity\obj\Debug\net6.0\ref\Entity.dll
-c:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\Entity\bin\Debug\net6.0\Entity.deps.json
-c:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\Entity\bin\Debug\net6.0\Entity.dll
-c:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\Entity\bin\Debug\net6.0\Entity.pdb
-c:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\Entity\obj\Debug\net6.0\Entity.GeneratedMSBuildEditorConfig.editorconfig
-c:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\Entity\obj\Debug\net6.0\Entity.AssemblyInfoInputs.cache
-c:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\Entity\obj\Debug\net6.0\Entity.AssemblyInfo.cs
-c:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\Entity\obj\Debug\net6.0\Entity.csproj.CoreCompileInputs.cache
-c:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\Entity\obj\Debug\net6.0\Entity.sourcelink.json
-c:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\Entity\obj\Debug\net6.0\Entity.dll
-c:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\Entity\obj\Debug\net6.0\refint\Entity.dll
-c:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\Entity\obj\Debug\net6.0\Entity.pdb
-c:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\Entity\obj\Debug\net6.0\ref\Entity.dll
