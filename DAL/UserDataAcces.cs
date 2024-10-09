@@ -53,7 +53,7 @@ public class UserDataAcces{
         SqlDataReader dataReader;
         List<User> users = new List<User> ( );
         using (var command = _connection.CreateCommand ( )) {
-            command.CommandText = "SELECT * FROM UsersTemp";
+            command.CommandText = "SELECT * FROM Users";
             dataReader = command.ExecuteReader ( );
             if (dataReader.HasRows) {
                 while (dataReader.Read ( )) {
@@ -65,56 +65,6 @@ public class UserDataAcces{
         return users;
     }
 
-    public User SearchByKey(string key, string value)
-    {
-        User user = Select(key, value);
-        return user;
-    }
-
-    public LoginUser DefaultSearchByKey(string key, string value)
-    {
-        LoginUser user = DefaultSelect(key, value);
-        return user;
-    }
-
-    private User Select(string key, string value)
-    {
-        SqlDataReader dataReader;
-        User user = new User();
-
-        using(var command = _connection.CreateCommand())
-        {
-            command.CommandText = $@"SELECT * FROM UsersTemp WHERE @value = {key}";
-            command.Parameters.AddWithValue("@value", value);
-            dataReader = command.ExecuteReader();
-            if (dataReader.HasRows)
-            {
-                dataReader.Read();
-                user = DataMapInReader(dataReader);
-            }
-            return user;
-        }
-    }
-
-    private LoginUser DefaultSelect(string key, string value)
-    {
-        SqlDataReader dataReader;
-        LoginUser user = new LoginUser();
-
-        using (var command = _connection.CreateCommand())
-        {
-            command.CommandText = $@"SELECT * FROM UsersTemp WHERE @value = {key}";
-            command.Parameters.AddWithValue("@value", value);
-            dataReader = command.ExecuteReader();
-            if (dataReader.HasRows)
-            {
-                dataReader.Read();
-                user = DefaultDataMapInReader(dataReader);
-            }
-            return user;
-        }
-    }
-
     public LoginUser GetUserByIdentificaction(string identificacion)
     {
         SqlDataReader dataReader;
@@ -122,7 +72,7 @@ public class UserDataAcces{
 
         using (var command = _connection.CreateCommand())
         {
-            command.CommandText = $@"SELECT * FROM Usuarios WHERE @identificacion = identificacion";
+            command.CommandText = $@"SELECT * FROM Users WHERE @identificacion = UsuarioIdentificacion";
             command.Parameters.AddWithValue("@identificacion", identificacion);
             dataReader = command.ExecuteReader();
             if (dataReader.HasRows)
@@ -159,7 +109,7 @@ public class UserDataAcces{
         user.Id = (int) dataReader["id"];
         user.Email = (string) dataReader["email"];          
         user.Rol = (string) dataReader["rol"];
-        user.Identificacion = ColumnValueIsNull(dataReader["identificacion"]) ? null : (string) dataReader["identificacion"];;
+        user.Identificacion = ColumnValueIsNull(dataReader["UsuarioIdentificacion"]) ? null : (string) dataReader["UsuarioIdentificacion"];;
         return user;
     }
 

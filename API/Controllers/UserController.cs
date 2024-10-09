@@ -19,6 +19,12 @@ using System.Security.Claims;
 [Authorize]
 public class UserController : Controller
 {
+    const string ACCESO_DENEGADO = "ACCESO DENEGADO";
+    const string ACCESO_CONCEDIDO = "ACCESO CONCEDIDO";
+    const string ESTUDIANTE = "ESTUDIANTE";
+    const string PROFESOR = "PROFESOR";
+    const string ADMIN = "ADMIN";
+
     private readonly UserService _userService;
     public IConfiguration Configuration { get; }
 
@@ -29,8 +35,8 @@ public class UserController : Controller
         _userService = new UserService(connectionString);
     }
 
-    [Authorize(Roles="Admin")]
     [HttpGet("get-users")]
+    [Authorize(Roles="Admin")]
     public ActionResult<List<UserViewModel>> GetUsers()
     {   
         var response = _userService.SearchAllUsers();
@@ -45,7 +51,7 @@ public class UserController : Controller
         return Ok(users);
     }
 
-    [AllowAnonymous]
+    [Authorize(Roles="Admin")]
     [HttpPost("register-default-user")]
     public ActionResult<DefaultUserLoginModel> RegisterDefaultUser(DefaultUserLoginModel user)
     {
@@ -64,7 +70,7 @@ public class UserController : Controller
     } 
 
     [HttpGet("identity")]
-    [Authorize(Roles="Admin,Estudiante,Profesor")]
+    [Authorize]
     public IActionResult GetIdentity()
     {
         var nameIdentifier = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier);
@@ -73,6 +79,41 @@ public class UserController : Controller
         IdentityModel identityModel = new IdentityModel(nameIdentifier.Value, rol.Value);
         return Ok(identityModel == null ? "" : identityModel);
     }
+
+    [HttpGet("StudentVerify")]
+    [Authorize]
+    public IActionResult StudentVerify()
+    {
+        var nameIdentifier = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier);
+        var rol = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.Role);
+        if(nameIdentifier == null || rol == null) {return Forbid();}
+        if(rol.Value.ToUpper().Equals(ESTUDIANTE)){return Ok(ACCESO_CONCEDIDO);}
+        return Unauthorized(ACCESO_DENEGADO);
+    }
+
+    [HttpGet("ProfesorVerify")]
+    [Authorize]
+    public IActionResult ProfesorVerify()
+    {
+        var nameIdentifier = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier);
+        var rol = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.Role);
+        if(nameIdentifier == null || rol == null) {return Forbid();}
+        if(rol.Value.ToUpper().Equals(PROFESOR)){return Ok(ACCESO_CONCEDIDO);}
+        return Unauthorized(ACCESO_DENEGADO);
+    }
+
+    [HttpGet("AdminVerify")]
+    [Authorize]
+    public IActionResult AdminVerify()
+    {
+        var nameIdentifier = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier);
+        var rol = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.Role);
+        if(nameIdentifier == null || rol == null) {return Forbid();}
+        if(rol.Value.ToUpper().Equals(ADMIN)){return Ok(ACCESO_CONCEDIDO);}
+        return Unauthorized(ACCESO_DENEGADO);
+    }
+
+
 
     private LoginUser MapUser(DefaultUserLoginModel user, string salt)
     {
