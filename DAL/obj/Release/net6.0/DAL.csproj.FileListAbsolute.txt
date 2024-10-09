@@ -1,0 +1,16 @@
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\DAL\bin\Release\net6.0\DAL.deps.json
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\DAL\bin\Release\net6.0\DAL.dll
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\DAL\bin\Release\net6.0\DAL.pdb
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\DAL\bin\Release\net6.0\Entity.dll
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\DAL\bin\Release\net6.0\Entity.pdb
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\DAL\obj\Release\net6.0\DAL.csproj.AssemblyReference.cache
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\DAL\obj\Release\net6.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\DAL\obj\Release\net6.0\DAL.AssemblyInfoInputs.cache
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\DAL\obj\Release\net6.0\DAL.AssemblyInfo.cs
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\DAL\obj\Release\net6.0\DAL.csproj.CoreCompileInputs.cache
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\DAL\obj\Release\net6.0\DAL.sourcelink.json
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\DAL\obj\Release\net6.0\DAL.csproj.Up2Date
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\DAL\obj\Release\net6.0\DAL.dll
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\DAL\obj\Release\net6.0\refint\DAL.dll
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\DAL\obj\Release\net6.0\DAL.pdb
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\DAL\obj\Release\net6.0\ref\DAL.dll

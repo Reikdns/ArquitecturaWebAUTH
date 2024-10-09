@@ -1,0 +1,13 @@
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\publish\BLL.dll
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\publish\BLL.deps.json
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\publish\BLL.pdb
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\publish\System.Data.SqlClient.dll
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\publish\runtimes\win-arm64\native\sni.dll
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\publish\runtimes\win-x64\native\sni.dll
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\publish\runtimes\win-x86\native\sni.dll
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\publish\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\publish\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\publish\DAL.dll
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\publish\Entity.dll
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\publish\Entity.pdb
+C:\Users\hp\Documents\Universidad\ARQUITECTURA WEB SALOMON\Aeris-API-REST\publish\DAL.pdb
