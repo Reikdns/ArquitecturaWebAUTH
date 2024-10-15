@@ -14,7 +14,7 @@ public class UserDataAcces{
         _connection = connection._connection;
     }
 
-    public void SaveDefaultUser(LoginUser user)
+    public bool SaveDefaultUser(LoginUser user)
     {
         using(var command = _connection.CreateCommand())
         {
@@ -24,10 +24,12 @@ public class UserDataAcces{
             {
                 SaveLoginUser(user, command);
                 transaction.Commit();
+                return true;
             }
             catch (Exception e)
             {
                 transaction.Rollback();
+                return false;
             }
             finally
             {
