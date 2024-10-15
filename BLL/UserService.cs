@@ -24,9 +24,10 @@ public class UserService
             try
             {
                 _connection.Open();
-                _repository.SaveDefaultUser(user);
+                bool result = _repository.SaveDefaultUser(user);
                 _connection.Close();
-                return new RequestResponse<IdentityModel>(identityModel, "El usuario ha sido guardado correctamente.");
+                if(result){ return new RequestResponse<IdentityModel>(identityModel, "El usuario ha sido guardado correctamente."); } 
+                return new RequestResponse<IdentityModel>("Error de llave foranea.");       
             }
             catch (Exception e)
             {
