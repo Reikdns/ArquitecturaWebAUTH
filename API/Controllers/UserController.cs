@@ -51,7 +51,7 @@ public class UserController : Controller
         return Ok(users);
     }
 
-    [AllowAnonymous]
+    [Authorize(Roles="Admin")]
     [HttpPost("register-default-user")]
     public ActionResult<DefaultUserLoginModel> RegisterDefaultUser(DefaultUserLoginModel user)
     {
